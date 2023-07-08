@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tbl_kategori', function (Blueprint $table) {
+            $table -> id();
+            $table -> char('kd_kategori', 100);
+            $table -> char('nama_kategori', 200);
+            $table -> text('keterangan');
+            $table -> float('bobot');
+            $table -> char('active', 1);
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tbl_kategori');
     }
 };

@@ -13,7 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tbl_user', function (Blueprint $table) {
+            $table -> id();
+            $table -> char('username', 50);
+            $table -> char('role', 10);
+            $table -> char('password', 200);
+            $table -> text('api_token')->nullable();
+            $table -> timestamps(); 
+            $table -> char('active', 1);
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tbl_user');
     }
 };
