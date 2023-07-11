@@ -17,7 +17,7 @@ return new class extends Migration
             $table -> id();
             $table -> char('kd_kategori', 100);
             $table -> char('nama_kategori', 200);
-            $table -> text('keterangan');
+            $table -> text('keterangan')->nullable();
             $table -> float('bobot');
             $table -> char('active', 1);
         });

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->char('kd_event', 100);
             $table->char('nama_event', 200);
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->integer('kuota');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
