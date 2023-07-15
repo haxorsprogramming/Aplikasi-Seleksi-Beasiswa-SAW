@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\UserModel;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
 class AuthController extends Controller
@@ -32,7 +35,7 @@ class AuthController extends Controller
         $dr = ['status'=>$status, 'token'=> Crypt::encryptString($token)];
         return \Response::json($dr);
     }
-    public function logOut()
+    public function logOut(): Redirector|Application|RedirectResponse
     {
         return redirect('/auth/login');
     }

@@ -22,6 +22,7 @@ Route::group(['prefix'=>'app'], function (){
         Route::get('/beranda', [DashboardController::class, 'berandaPage']);
         Route::group(['prefix'=>'event'], function (){
             Route::get('/', [EventController::class, 'eventPage']);
+            Route::post('/add', [EventController::class, 'addProcess']);
         });
     });
 });
