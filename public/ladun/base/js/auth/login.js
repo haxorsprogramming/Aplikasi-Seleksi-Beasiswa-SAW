@@ -1,7 +1,7 @@
-// route 
-var rProsesLogin = server + "auth/login/proses";
-var rDashboard = server + "dashboard";
-// vue object 
+// route
+var rProsesLogin = server + "auth/login/process";
+var rDashboard = server + "app";
+// vue object
 var loginApp = new Vue({
     el : '#divLogin',
     data : {},
@@ -13,7 +13,7 @@ var loginApp = new Vue({
     }
 });
 
-// inisialisasi 
+// inisialisasi
 document.querySelector("#txtUsername").focus();
 
 function loginProses()
@@ -27,10 +27,12 @@ function loginProses()
             pesanUmumApp('warning', 'No User .. !!', 'Tidak ada user terdaftar ..');
         }else if(obj.status === 'WRONG_PASSWORD'){
             pesanUmumApp('warning', 'Fail auth .. !!', 'Username / Password salah ..');
+        }else if(obj.status === 'SUCCESS'){
+            window.location.assign(rDashboard+"/"+obj.token);
         }else{
-            window.location.assign(rDashboard);
+            pesanUmumApp('error', 'Fail auth .. !!', 'Kesalahan tidak dikenal ..');
         }
-    }); 
+    });
 }
 
 function pesanUmumApp(icon, title, text)

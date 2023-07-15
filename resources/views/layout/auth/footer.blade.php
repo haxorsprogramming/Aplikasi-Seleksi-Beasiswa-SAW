@@ -12,7 +12,7 @@
 <script>
     const server = "{{ url('') }}/";
 </script>
-<script src="{{ asset('ladun/base/') }}/js/login.js"></script>
+<script src="{{ asset('ladun/base/') }}/js/auth/login.js"></script>
 
 </body>
 
