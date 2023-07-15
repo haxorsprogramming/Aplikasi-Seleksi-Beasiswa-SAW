@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
@@ -21,5 +22,9 @@ class DashboardController extends Controller
             return redirect('auth/login');
         }
         return view('app.dashboard');
+    }
+    public function berandaPage():View
+    {
+        return view('app.beranda');
     }
 }

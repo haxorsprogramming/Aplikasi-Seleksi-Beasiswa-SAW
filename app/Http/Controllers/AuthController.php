@@ -14,7 +14,6 @@ class AuthController extends Controller
     }
     public function loginProcess(Request $request)
     {
-
         $tUser = UserModel::where('username', $request->username)->count();
         $token = null;
         if($tUser < 1){
@@ -32,5 +31,9 @@ class AuthController extends Controller
         }
         $dr = ['status'=>$status, 'token'=> Crypt::encryptString($token)];
         return \Response::json($dr);
+    }
+    public function logOut()
+    {
+        return redirect('/auth/login');
     }
 }

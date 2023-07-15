@@ -1,6 +1,6 @@
-// route 
+// route
 
-// insialisasi 
+// insialisasi
 var mainApp = new Vue({
     el : '#mainApp',
     data : {
@@ -13,12 +13,13 @@ var mainApp = new Vue({
 
 function renderPage(page, judulPage)
 {
-    $("#divUtama").html("Memuat ...");
-    $("#divUtama").load(server + page);
+    let dUtama = $("#divUtama");
+    dUtama.html("Memuat ...");
+    dUtama.load(server + page);
     mainApp.judulPage = judulPage;
 }
 
-renderPage('dashboard/beranda', 'Dashboard');
+renderPage('app/core/beranda', 'Dashboard');
 
 function pesanUmumApp(icon, title, text)
 {
