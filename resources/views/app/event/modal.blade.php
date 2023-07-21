@@ -12,6 +12,7 @@
                 <div class="form-group">
                     <label for="company">Nama Event</label>
                     <input type="text" class="form-control" id="txtNamaEvent">
+                    <small><i>*) Nama event minimal 5 karakter</i></small>
                 </div>
                 <div class="form-group">
                     <label for="company">Keterangan</label>
@@ -19,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     <label for="company">Kuota</label>
-                    <input type="number" class="form-control" id="txtKuota">
+                    <input type="number" class="form-control" id="txtKuota" required>
                 </div>
                 <div class="form-group">
                     <label for="company">Tanggal Mulai</label>

@@ -23,7 +23,7 @@ class DashboardController extends Controller
         }
         return view('app.dashboard');
     }
-    public function berandaPage():View
+    public function berandaPage()
     {
         return view('app.beranda');
     }

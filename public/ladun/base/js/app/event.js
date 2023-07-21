@@ -12,37 +12,6 @@ var appProduk = new Vue({
                 document.querySelector("#txtNamaEvent").focus();
             }, 500);
         },
-        editAtc : function(idProduk)
-        {
-            editProduk(idProduk);
-        },
-        prosesUpdateProdukAtc : function()
-        {
-            let kdProduk = appProduk.kdProdukEdit;
-            let nama = document.querySelector("#txtNamaProdukEdit").value;
-            let harga = document.querySelector("#txtHargaEdit").value;
-            let kategori = document.querySelector("#txtKategoriEdit").value;
-            let ds = {'kdProduk':kdProduk, 'nama':nama, 'harga':harga, 'kategori':kategori}
-            axios.post(rProsesUpdateProduk, ds).then(function(res){
-                $("#modalEditProduk").modal("hide");
-                setTimeout(function(){
-                    pesanUmumApp('success', 'Sukses', 'Data produk berhasil diupdate');
-                    renderPage('app/produk/data');
-                }, 300);
-            });
-        },
-        deleteAtc : function(idProduk)
-        {
-            confirmQuest('info', 'Konfirmasi', 'Hapus produk ...?', function (x) {deleteConfirm(idProduk)});
-        },
-        importProdukAtc : function()
-        {
-            $("#modalImportProduk").modal("show");
-        },
-        prosesImportProdukAtc : function()
-        {
-            confirmQuest('info', 'Konfirmasi', 'Import produk... ?', function (x) {konfirmasiImport()});
-        }
     }
 });
 
@@ -55,9 +24,18 @@ function prosesTambahEvent()
     let tglMulai = document.querySelector("#txtTanggalMulai").value;
     let tglSelesai = document.querySelector("#txtTanggalSelesai").value;
 
-    let dr = {'nama':namaEvent}
-    axios.post(r, dr).then(function (res){
-       console.log(res.data);
-    });
-
+    if(namaEvent.length < 5 || kuota === "0" || kuota.length === 0){
+        pesanUmumApp('warning', 'Validasi form !!!', 'Harap isi semua field !!!');
+    }else{
+        let dr = {
+            'nama': namaEvent,
+            'keterangan': keterangan,
+            'kuota': kuota,
+            'tglMulai': tglMulai,
+            'tglSelesai':tglSelesai
+        }
+        axios.post(r, dr).then(function (res){
+            console.log(res.data);
+        });
+    }
 }
