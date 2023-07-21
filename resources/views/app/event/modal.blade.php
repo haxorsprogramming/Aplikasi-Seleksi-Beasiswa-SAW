@@ -29,9 +29,10 @@
                 <div class="form-group">
                     <label for="company">Tanggal Selesai</label>
                     <input type="date" class="form-control" id="txtTanggalSelesai">
+                    <small><i>*) Perhatikan validasi tanggal</i></small>
                 </div>
                 <div>
-                    <a href="javascript:void(0)" class="btn btn-primary" onclick="prosesTambahEvent()">Proses Tambah Event</a>
+                    <a href="javascript:void(0)" class="btn btn-primary" id="btnTambahEvent" onclick="prosesTambahEvent()">Proses Tambah Event</a>
                 </div>
             </div>
             <div class="modal-footer bg-whitesmoke br">
