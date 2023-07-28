@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->share('icDelete', 'mdi mdi-trash-can');
+        view()->share('icEdit', 'mdi mdi-settings');
+        view()->share('icStartEvent', 'mdi mdi-clock-start');
     }
 }

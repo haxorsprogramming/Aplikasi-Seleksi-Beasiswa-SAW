@@ -12,8 +12,13 @@ var appProduk = new Vue({
                 document.querySelector("#txtNamaEvent").focus();
             }, 500);
         },
+        startEventAtc : function (kdEvent)
+        {
+
+        },
         editEventAtc : function (kdEvent)
         {
+            appProduk.kdProdukEdit = kdEvent;
             let r = server + "app/core/event/api/detail";
             let dr = {'kdEvent':kdEvent}
             axios.post(r, dr).then(function (res){
@@ -77,16 +82,28 @@ function prosesEditEvent()
     if(sValidasi === false){
         pesanUmumApp('warning', 'Validasi form !!!', 'Harap isi semua field !!!');
     }else{
-
         let dr = {
             'nama': namaEvent,
             'keterangan': keterangan,
             'kuota': kuota,
             'tglMulai': tglMulai,
-            'tglSelesai':tglSelesai
+            'tglSelesai': tglSelesai,
+            'kdEvent': appProduk.kdProdukEdit
         }
-        //confirmQuest('info', 'Konfirmasi', 'Proses tambah event ...?', function (x) {tambahProses(dr)});
+        confirmQuest('info', 'Konfirmasi', 'Proses tambah event ...?', function (x) {editProses(dr)});
     }
+}
+
+function editProses(dr)
+{
+    let r = server + "app/core/event/update";
+    axios.post(r, dr).then(function (res){
+        $("#modalEditEvent").modal("hide");
+        setTimeout(function(){
+            pesanUmumApp(res.data.status === true ? 'success' : 'warning', res.data.code, res.data.msg);
+            renderPage('app/core/event');
+        }, 300);
+    });
 }
 
 function tambahProses(dr)
@@ -94,14 +111,13 @@ function tambahProses(dr)
     let r = server + "app/core/event/add";
     document.querySelector("#btnTambahEvent").classList.add("disabled");
     axios.post(r, dr).then(function (res){
-        let status = res.data.status;
-        if(res.data.status === "DOUBLE_NAME"){
-            pesanUmumApp('warning', 'Double data', 'Nama event sudah pernah ditambahkan ..');
+        if(res.data.code === 401){
+            pesanUmumApp('warning', res.data.code, res.data.msg);
             document.querySelector("#btnTambahEvent").classList.remove("disabled");
         }else{
             $("#modalTambahEvent").modal("hide");
             setTimeout(function(){
-                pesanUmumApp('success', 'Sukses', 'Data event berhasil ditambahkan ..');
+                pesanUmumApp('success', res.data.code, res.data.msg);
                 renderPage('app/core/event');
             }, 300);
         }
@@ -113,11 +129,14 @@ function hapusProses(kdEvent)
     let r = server + "app/core/event/delete";
     let dr = {'kdEvent':kdEvent}
     axios.post(r, dr).then(function (res){
-        let status = res.data.status;
-        setTimeout(function(){
-            pesanUmumApp('success', 'Sukses', 'Data event berhasil dihapus ..');
-            renderPage('app/core/event');
-        }, 300);
+        if(res.data.status === true){
+            setTimeout(function(){
+                pesanUmumApp('success', 'Sukses', 'Data event berhasil dihapus ..');
+                renderPage('app/core/event');
+            }, 300);
+        }else{
+            pesanUmumApp('warning', res.data.code, res.data.msg);
+        }
     });
 }
 

@@ -32,11 +32,14 @@
                             <td>{{ $e->tanggal_mulai }}</td>
                             <td>{{ $e->status_event  }}</td>
                             <td>
+                                <a class="btn btn-success btn-sm waves-effect waves-light" href="javascript:void(0)" @click="startEventAtc('{{ $e->kd_event }}')">
+                                    <i class="{{ $icStartEvent }}"></i> Start Event
+                                </a>
                                 <a class="btn btn-primary btn-sm waves-effect waves-light" href="javascript:void(0)" @click="editEventAtc('{{ $e->kd_event }}')">
-                                    <i class="mdi mdi-folder-edit-outline"></i> Edit
+                                    <i class="{{ $icEdit }}"></i> Edit
                                 </a>
                                 <a class="btn btn-warning btn-sm waves-effect waves-light" href="javascript:void(0)" @click="deleteEventAtc('{{ $e->kd_event }}')">
-                                    <i class="mdi mdi-folder-edit-outline"></i> Hapus
+                                    <i class="{{ $icDelete }}"></i> Hapus
                                 </a>
                             </td>
                         </tr>

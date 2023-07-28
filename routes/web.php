@@ -24,6 +24,7 @@ Route::group(['prefix'=>'app'], function (){
             Route::get('/', [EventController::class, 'eventPage']);
             Route::post('/add', [EventController::class, 'addProcess']);
             Route::post('/delete', [EventController::class, 'deleteProcess']);
+            Route::post('/update', [EventController::class, 'updateProcess']);
             Route::group(['prefix'=>'api'], function (){
                Route::post('/detail', [EventController::class, 'apiDetail']);
             });

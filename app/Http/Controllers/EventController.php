@@ -9,6 +9,12 @@ use Illuminate\Support\Str;
 use App\Models\EventModel;
 class EventController extends Controller
 {
+
+    private $baseResponse;
+    public function __construct()
+    {
+        $this->baseResponse = array("status" => null, "code" => null, "data" => null, "msg" => null);
+    }
     public function eventPage()
     {
         $dataEvent = EventModel::where('active', '1')->get();
@@ -17,12 +23,6 @@ class EventController extends Controller
     }
     public function addProcess(Request $request)
     {
-        $date1 = Carbon::parse('2022-01-10');
-        $date2 = Carbon::parse('2022-01-01');
-        $diff = $date1->diffInDays($date2);
-
-        $statusInsert = "";
-
         $cekEvent = $this->checkNamaEvent($request->nama);
         if($cekEvent){
             $kdEvent = Str::uuid();
@@ -36,24 +36,26 @@ class EventController extends Controller
             $ne->status_event = "PENDING";
             $ne->active = "1";
             $ne->save();
-            $statusInsert = "SUCCESS";
+            $this->baseResponse['status'] = true;
+            $this->baseResponse['code'] = 200;
+            $this->baseResponse['msg'] = "Sukses menambahkan event ...";
         }else{
-            $statusInsert = "DOUBLE_NAME";
+            $this->baseResponse['status'] = false;
+            $this->baseResponse['code'] = 401;
+            $this->baseResponse['msg'] = "Nama event sudah di daftarkan ...";
         }
 
-        $dr = [
-          'status' => $statusInsert
-        ];
-        return \Response::json($dr);
+        return \Response::json($this->baseResponse);
     }
 
     public function deleteProcess(Request $request)
     {
         EventModel::where('kd_event', $request->kdEvent)->delete();
-        $dr = [
-            'status' => 'success'
-        ];
-        return \Response::json($dr);
+        $this->baseResponse['status'] = true;
+        $this->baseResponse['code'] = 200;
+        $this->baseResponse['data'] = null;
+        $this->baseResponse['msg'] = "Success delete event ...";
+        return \Response::json($this->baseResponse);
     }
 
     public function apiDetail(Request $request)
@@ -61,12 +63,26 @@ class EventController extends Controller
         $kdEvent = $request->kdEvent;
         $dEvent = EventModel::where('kd_event', $kdEvent)->first();
 
-        $dr = [
-            'data' => $dEvent,
-            'status' => true,
-            'error' => null
-        ];
-        return \Response::json($dr);
+        $this->baseResponse['status'] = true;
+        $this->baseResponse['code'] = 200;
+        $this->baseResponse['data'] = $dEvent;
+        $this->baseResponse['msg'] = "Success delete event ...";
+        return \Response::json($this->baseResponse);
+    }
+
+    public function updateProcess(Request $request)
+    {
+        EventModel::where('kd_event', $request->kdEvent)->update(
+            ['nama_event' => $request->nama],
+            ['keterangan' => $request->keterangan],
+            ['kuota' => $request->quota]
+        );
+
+        $this->baseResponse['status'] = true;
+        $this->baseResponse['code'] = 200;
+        $this->baseResponse['msg'] = "Success update event ...";
+
+        return \Response::json($this->baseResponse);
     }
 
     function checkNamaEvent(string $namaEvent):bool
