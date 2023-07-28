@@ -15,7 +15,7 @@
                     <tr>
                         <th>#</th>
                         <th>Nama Seleksi</th>
-                        <th>Deksripsi</th>
+                        <th style="width: 300px;">Deksripsi</th>
                         <th>Kuota</th>
                         <th>Timeline</th>
                         <th>Status Event</th>
@@ -23,7 +23,24 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($dataEvent as $e)
+                        <tr>
+                            <td>{{ $loop->iteration  }}</td>
+                            <td>{{ $e->nama_event }}</td>
+                            <td>{{ $e->keterangan }}</td>
+                            <td>{{ $e->kuota }}</td>
+                            <td>{{ $e->tanggal_mulai }}</td>
+                            <td>{{ $e->status_event  }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm waves-effect waves-light" href="javascript:void(0)" @click="editEventAtc('{{ $e->kd_event }}')">
+                                    <i class="mdi mdi-folder-edit-outline"></i> Edit
+                                </a>
+                                <a class="btn btn-warning btn-sm waves-effect waves-light" href="javascript:void(0)" @click="deleteEventAtc('{{ $e->kd_event }}')">
+                                    <i class="mdi mdi-folder-edit-outline"></i> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

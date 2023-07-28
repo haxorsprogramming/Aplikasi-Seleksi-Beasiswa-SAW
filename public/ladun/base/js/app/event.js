@@ -12,12 +12,37 @@ var appProduk = new Vue({
                 document.querySelector("#txtNamaEvent").focus();
             }, 500);
         },
+        editEventAtc : function (kdEvent)
+        {
+            let r = server + "app/core/event/api/detail";
+            let dr = {'kdEvent':kdEvent}
+            axios.post(r, dr).then(function (res){
+               if(res.data.status === true){
+                   document.querySelector("#txtNamaEventEdit").value = res.data.data.nama_event;
+                   document.querySelector("#txtKeteranganEdit").value = res.data.data.keterangan;
+                   document.querySelector("#txtKuotaEdit").value = res.data.data.kuota;
+                   document.querySelector("#txtTanggalMulaiEdit").value = res.data.data.tanggal_mulai;
+                   document.querySelector("#txtTanggalSelesaiEdit").value = res.data.data.tanggal_selesai;
+                   $("#modalEditEvent").modal("show");
+                   setTimeout(function(){
+                       document.querySelector("#txtNamaEventEdit").focus();
+                   }, 500);
+
+               }else{
+                   pesanUmumApp('warning', 'Failed', res.data.error);
+               }
+            });
+        },
+        deleteEventAtc : function (kdEvent)
+        {
+            confirmQuest('info', 'Konfirmasi', 'Proses hapus event ...?', function (x) {hapusProses(kdEvent)});
+        }
     }
 });
 
 function prosesTambahEvent()
 {
-    let r = server + "app/core/event/add";
+
     let namaEvent = document.querySelector("#txtNamaEvent").value;
     let keterangan = document.querySelector("#txtKeterangan").value;
     let kuota = document.querySelector("#txtKuota").value;
@@ -37,12 +62,36 @@ function prosesTambahEvent()
             'tglMulai': tglMulai,
             'tglSelesai':tglSelesai
         }
-        confirmQuest('info', 'Konfirmasi', 'Proses tambah event ...?', function (x) {tambahProses(r, dr)});
+        confirmQuest('info', 'Konfirmasi', 'Proses tambah event ...?', function (x) {tambahProses(dr)});
     }
 }
 
-function tambahProses(r, dr)
+function prosesEditEvent()
 {
+    let namaEvent = document.querySelector("#txtNamaEventEdit").value;
+    let keterangan = document.querySelector("#txtKeteranganEdit").value;
+    let kuota = document.querySelector("#txtKuotaEdit").value;
+    let tglMulai = document.querySelector("#txtTanggalMulaiEdit").value;
+    let tglSelesai = document.querySelector("#txtTanggalSelesaiEdit").value;
+    let sValidasi = validasiProses(namaEvent, kuota, tglMulai, tglSelesai);
+    if(sValidasi === false){
+        pesanUmumApp('warning', 'Validasi form !!!', 'Harap isi semua field !!!');
+    }else{
+
+        let dr = {
+            'nama': namaEvent,
+            'keterangan': keterangan,
+            'kuota': kuota,
+            'tglMulai': tglMulai,
+            'tglSelesai':tglSelesai
+        }
+        //confirmQuest('info', 'Konfirmasi', 'Proses tambah event ...?', function (x) {tambahProses(dr)});
+    }
+}
+
+function tambahProses(dr)
+{
+    let r = server + "app/core/event/add";
     document.querySelector("#btnTambahEvent").classList.add("disabled");
     axios.post(r, dr).then(function (res){
         let status = res.data.status;
@@ -59,8 +108,17 @@ function tambahProses(r, dr)
     });
 }
 
-function dimElement(e){
-
+function hapusProses(kdEvent)
+{
+    let r = server + "app/core/event/delete";
+    let dr = {'kdEvent':kdEvent}
+    axios.post(r, dr).then(function (res){
+        let status = res.data.status;
+        setTimeout(function(){
+            pesanUmumApp('success', 'Sukses', 'Data event berhasil dihapus ..');
+            renderPage('app/core/event');
+        }, 300);
+    });
 }
 
 function validasiProses(nama, kuota, tglMulai, tglSelesai)

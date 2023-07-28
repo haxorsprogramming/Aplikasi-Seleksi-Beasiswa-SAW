@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\EventModel;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+
+use App\Models\EventModel;
 class EventController extends Controller
 {
     public function eventPage()
     {
-        return view('app.event.event');
+        $dataEvent = EventModel::where('active', '1')->get();
+        $dr = ['dataEvent' => $dataEvent];
+        return view('app.event.event', $dr);
     }
     public function addProcess(Request $request)
     {
@@ -20,9 +23,9 @@ class EventController extends Controller
 
         $statusInsert = "";
 
-        $cekEvent = $this->CheckNamaEvent($request->nama);
+        $cekEvent = $this->checkNamaEvent($request->nama);
         if($cekEvent){
-            $kdEvent = substr(Str::upper(Str::slug($request->nama, '-')), 0, 10) ;
+            $kdEvent = Str::uuid();
             $ne = new EventModel();
             $ne->kd_event = $kdEvent;
             $ne->nama_event = $request->nama;
@@ -44,7 +47,29 @@ class EventController extends Controller
         return \Response::json($dr);
     }
 
-    public function CheckNamaEvent(string $namaEvent):bool
+    public function deleteProcess(Request $request)
+    {
+        EventModel::where('kd_event', $request->kdEvent)->delete();
+        $dr = [
+            'status' => 'success'
+        ];
+        return \Response::json($dr);
+    }
+
+    public function apiDetail(Request $request)
+    {
+        $kdEvent = $request->kdEvent;
+        $dEvent = EventModel::where('kd_event', $kdEvent)->first();
+
+        $dr = [
+            'data' => $dEvent,
+            'status' => true,
+            'error' => null
+        ];
+        return \Response::json($dr);
+    }
+
+    function checkNamaEvent(string $namaEvent):bool
     {
         $statusCek = true;
         $qCekEvent = EventModel::where('nama_event', $namaEvent)->count();
