@@ -1,5 +1,3 @@
-// route
-
 // insialisasi
 var mainApp = new Vue({
     el : '#mainApp',

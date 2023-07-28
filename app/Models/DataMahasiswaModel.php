@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataMahasiswaModel extends Model
 {
-    use HasFactory;
+    protected $table = "tbl_data_mahasiswa";
+    public $timestamps = false;
+    protected $fillable = [
+        'kd_mahasiswa',
+        'nik',
+        'nim',
+        'nama_lengkap',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jurusan',
+        'nomor_handphone',
+        'email',
+        'username',
+        'alamat',
+        'active'
+    ];
 }
