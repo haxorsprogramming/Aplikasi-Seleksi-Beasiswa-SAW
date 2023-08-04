@@ -37,22 +37,37 @@ function preTambahMahasiswa()
     let email = document.querySelector("#txtEmail").value;
     let username = document.querySelector("#txtUsername").value;
     let alamat = document.querySelector("#txtAlamat").value;
+    let citraData = document.querySelector("#txtPreviewUpload").getAttribute("src");
 
-    let ds = {
-        'nim':nim,
-        'nik':nik,
-        'nama':nama,
-        'tempatLahir':tempatLahir,
-        'tanggalLahir':tanggalLahir,
-        'jurusan':jurusan,
-        'hp':hp,
-        'email':email,
-        'username':username,
-        'alamat':alamat
+    let sValidasi = validasiProses(nim, nik, nama, tempatLahir, tanggalLahir, jurusan, hp, email, username, alamat);
+
+    if(sValidasi === false){
+        pesanUmumApp('warning', 'Validasi form !!!', 'Harap isi semua field !!!');
+    }else{
+        let ds = {
+            'nim':nim,
+            'nik':nik,
+            'nama':nama,
+            'tempatLahir':tempatLahir,
+            'tanggalLahir':tanggalLahir,
+            'jurusan':jurusan,
+            'hp':hp,
+            'email':email,
+            'username':username,
+            'alamat':alamat
+        }
+
+        confirmQuest('info', 'Konfirmasi', 'Proses tambah mahasiswa ...?', function (x) {tambahProses(ds)});
     }
 
+}
 
-    let citraData = document.querySelector("#txtPreviewUpload").getAttribute("src");
+function tambahProses(ds)
+{
+    let r = server + "app/core/mahasiswa/add";
+    axios.post(r, ds).then(function (res){
+       console.log(res.data);
+    });
 }
 
 function validasiProses(nim, nik, nama, tempatLahir, tanggalLahir, jurusan, hp, email, username, alamat)
@@ -84,6 +99,9 @@ function validasiProses(nim, nik, nama, tempatLahir, tanggalLahir, jurusan, hp, 
         statusValidasi = false;
     }
     if(username.length < 4){
+        statusValidasi = false;
+    }
+    if(alamat.length < 0){
         statusValidasi = false;
     }
 

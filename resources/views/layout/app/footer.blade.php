@@ -42,9 +42,6 @@
 <script src="{{ asset('ladun/apaxy/') }}/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('ladun/apaxy/') }}/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
-<script type="text/javascript" src="{{ asset('ladun/cropper/scripts/jquery.Jcrop.js') }}"></script>
-<script type="text/javascript" src="{{ asset('ladun/cropper/scripts/jquery.SimpleCropper.js') }}"></script>
-
 <script src="{{ asset('ladun/apaxy/') }}/js/app.js"></script>
 <script>
     const server = "{{ url('') }}/";

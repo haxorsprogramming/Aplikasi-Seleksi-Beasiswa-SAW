@@ -35,6 +35,7 @@ Route::group(['prefix'=>'app'], function (){
         // mahasiswa
         Route::group(['prefix'=>'mahasiswa'], function (){
             Route::get('/', [MahasiswaController::class, 'mahasiswaPage']);
+            Route::post('/add', [MahasiswaController::class, 'addProcess']);
         });
     });
 });
