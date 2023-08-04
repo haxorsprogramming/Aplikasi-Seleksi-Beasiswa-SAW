@@ -27,6 +27,10 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('ladun/apaxy/') }}/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" type="text/css" href="{{ asset('ladun/cropper/css/style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('ladun/cropper/css/style-example.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('ladun/cropper/css/jquery.Jcrop.css') }}"/>
+
     <!-- Icons Css -->
     <link href="{{ asset('ladun/apaxy/') }}/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
