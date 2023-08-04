@@ -32,9 +32,11 @@
                             <td>{{ $e->tanggal_mulai }}</td>
                             <td>{{ $e->status_event  }}</td>
                             <td>
+                                @if($e->status_event == 'PENDING')
                                 <a class="btn btn-success btn-sm waves-effect waves-light" href="javascript:void(0)" @click="startEventAtc('{{ $e->kd_event }}')">
                                     <i class="{{ $icStartEvent }}"></i> Start Event
                                 </a>
+                                @endif
                                 <a class="btn btn-primary btn-sm waves-effect waves-light" href="javascript:void(0)" @click="editEventAtc('{{ $e->kd_event }}')">
                                     <i class="{{ $icEdit }}"></i> Edit
                                 </a>

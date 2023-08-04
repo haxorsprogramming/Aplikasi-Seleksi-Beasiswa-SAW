@@ -85,6 +85,18 @@ class EventController extends Controller
         return \Response::json($this->baseResponse);
     }
 
+    public function startEvent(Request $request)
+    {
+        $qUpdate = EventModel::where('kd_event', $request->kdEvent)->update(['status_event' => 'ONGOING']);
+        if($qUpdate){
+            $this->baseResponse['status'] = true;
+            $this->baseResponse['code'] = 200;
+            $this->baseResponse['msg'] = "Success start event ...";
+        }
+
+        return \Response::json($this->baseResponse);
+    }
+
     function checkNamaEvent(string $namaEvent):bool
     {
         $statusCek = true;

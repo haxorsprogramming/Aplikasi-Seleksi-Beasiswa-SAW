@@ -14,7 +14,7 @@ var appProduk = new Vue({
         },
         startEventAtc : function (kdEvent)
         {
-
+            confirmQuest('info', 'Konfirmasi', 'Proses start event ...?', function (x) {startEventProses(kdEvent)});
         },
         editEventAtc : function (kdEvent)
         {
@@ -69,6 +69,19 @@ function prosesTambahEvent()
         }
         confirmQuest('info', 'Konfirmasi', 'Proses tambah event ...?', function (x) {tambahProses(dr)});
     }
+}
+
+function startEventProses(kdEvent)
+{
+    let ds = {'kdEvent':kdEvent}
+    let r = server + "app/core/event/start";
+    axios.post(r, ds).then(function (res){
+        $("#modalEditEvent").modal("hide");
+        setTimeout(function(){
+            pesanUmumApp(res.data.status === true ? 'success' : 'warning', res.data.code, res.data.msg);
+            renderPage('app/core/event');
+        }, 300);
+    });
 }
 
 function prosesEditEvent()

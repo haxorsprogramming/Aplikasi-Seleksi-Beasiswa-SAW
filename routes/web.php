@@ -30,6 +30,7 @@ Route::group(['prefix'=>'app'], function (){
             Route::group(['prefix'=>'api'], function (){
                Route::post('/detail', [EventController::class, 'apiDetail']);
             });
+            Route::post('/start', [EventController::class, 'startEvent']);
         });
         // mahasiswa
         Route::group(['prefix'=>'mahasiswa'], function (){
