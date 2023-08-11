@@ -54,7 +54,8 @@ function preTambahMahasiswa()
             'hp':hp,
             'email':email,
             'username':username,
-            'alamat':alamat
+            'alamat':alamat,
+            'fotoProfil':citraData
         }
 
         confirmQuest('info', 'Konfirmasi', 'Proses tambah mahasiswa ...?', function (x) {tambahProses(ds)});
@@ -66,7 +67,11 @@ function tambahProses(ds)
 {
     let r = server + "app/core/mahasiswa/add";
     axios.post(r, ds).then(function (res){
-       console.log(res.data);
+        $("#modalTambahMahasiswa").modal("hide");
+        setTimeout(function(){
+            pesanUmumApp(res.data.status === true ? 'success' : 'warning', res.data.code, res.data.msg);
+            renderPage('app/core/mahasiswa');
+        }, 300);
     });
 }
 

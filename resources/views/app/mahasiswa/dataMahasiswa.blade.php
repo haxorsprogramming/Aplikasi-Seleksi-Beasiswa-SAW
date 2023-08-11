@@ -22,7 +22,16 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($dataMahasiswa as $mhs)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $mhs->nim }}</td>
+                            <td>{{ $mhs->nama_lengkap }}</td>
+                            <td>{{ $mhs->jurusan }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
