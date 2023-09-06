@@ -159,6 +159,7 @@ function validasiProses(nama, kuota, tglMulai, tglSelesai)
     var date1 = new Date(tglMulai);
     var date2 = new Date(tglSelesai);
 
+
     var Difference_In_Time = date2.getTime() - date1.getTime();
     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 

@@ -29,7 +29,14 @@
                             <td>{{ $mhs->nama_lengkap }}</td>
                             <td>{{ $mhs->jurusan }}</td>
                             <td></td>
-                            <td></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm waves-effect waves-light" href="javascript:void(0)" @click="editEventAtc('{{ $mhs->nim }}')">
+                                    <i class="{{$icEdit}}"></i> Edit
+                                </a>
+                                <a class="btn btn-warning btn-sm waves-effect waves-light" href="javascript:void(0)" @click="deleteEventAtc('{{ $mhs->nim}}')">
+                                    <i class="{{ $icDelete }}"></i> Hapus
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

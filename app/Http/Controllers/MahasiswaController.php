@@ -18,11 +18,11 @@ class MahasiswaController extends Controller
     }
     function mahasiswaPage()
     {
-        $dataJurusan = Config::get('helper.jurusan');
+        $dataJurusan = Config::get("helper.jurusan");
         $dataMahasiswa = DataMahasiswaModel::all();
         $dr = [
-            'dataJurusan' => $dataJurusan,
-            'dataMahasiswa' => $dataMahasiswa
+            "dataJurusan" => $dataJurusan,
+            "dataMahasiswa" => $dataMahasiswa
         ];
         return view('app.mahasiswa.mahasiswa', $dr);
     }
@@ -30,7 +30,7 @@ class MahasiswaController extends Controller
     {
         $cekMhs = $this->cekNim($request->nim);
         if($cekMhs){
-//            fotoProfil
+            // fotoProfil
             $picUtama = $request->fotoProfil;
             $namaPic = $request->nim.".jpg";
             $image_array_1 = explode(";", $picUtama);

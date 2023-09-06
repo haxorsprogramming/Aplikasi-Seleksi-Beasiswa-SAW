@@ -87,7 +87,7 @@ class EventController extends Controller
 
     public function startEvent(Request $request)
     {
-        $qUpdate = EventModel::where('kd_event', $request->kdEvent)->update(['status_event' => 'ONGOING']);
+        $qUpdate = EventModel::where('kd_event', $request->kdEvent)->update(['status_event' => 'BERLANGSUNG']);
         if($qUpdate){
             $this->baseResponse['status'] = true;
             $this->baseResponse['code'] = 200;

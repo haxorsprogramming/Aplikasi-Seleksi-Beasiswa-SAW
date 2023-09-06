@@ -11,6 +11,12 @@ var appMahasiswa = new Vue({
             setTimeout(function(){
                 document.querySelector("#txtNim").focus();
             }, 500);
+        },
+        editEventAtc : function (nim){
+
+        },
+        deleteEventAtc : function (nim){
+            console.log(nim);
         }
     }
 });
@@ -79,6 +85,9 @@ function validasiProses(nim, nik, nama, tempatLahir, tanggalLahir, jurusan, hp, 
 {
     let statusValidasi = true;
 
+    let picDefault = server + "/ladun/base/default-user-profile-picture.jpg";
+    let picNow = document.querySelector("#txtPreviewUpload").getAttribute("src");
+
     if(nim.length < 1){
         statusValidasi = false;
     }
@@ -107,6 +116,9 @@ function validasiProses(nim, nik, nama, tempatLahir, tanggalLahir, jurusan, hp, 
         statusValidasi = false;
     }
     if(alamat.length < 0){
+        statusValidasi = false;
+    }
+    if(picDefault === picNow){
         statusValidasi = false;
     }
 
