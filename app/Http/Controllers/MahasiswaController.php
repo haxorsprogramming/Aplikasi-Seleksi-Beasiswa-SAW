@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Exception;
 
 use App\Models\DataMahasiswaModel;
 
@@ -61,6 +62,23 @@ class MahasiswaController extends Controller
             $this->baseResponse['msg'] = "Duplikasi NIM (Nomor Induk Mahasiswa) !!!";
         }
 
+        return \Response::json($this->baseResponse);
+    }
+
+    public function deleteProcess(Request $request)
+    {
+        $namaPic = $request->nim.".jpg";
+        // hapus foto
+        try {
+            unlink("file_upload/foto_mahasiswa/".$namaPic);
+        } finally {
+            DataMahasiswaModel::where('nim', $request->nim)->delete();
+        }
+
+
+        $this->baseResponse['status'] = true;
+        $this->baseResponse['code'] = 200;
+        $this->baseResponse['msg'] = "Sukses menghapus data mahasiswa ...";
         return \Response::json($this->baseResponse);
     }
 

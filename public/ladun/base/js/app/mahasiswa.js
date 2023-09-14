@@ -16,10 +16,26 @@ var appMahasiswa = new Vue({
 
         },
         deleteEventAtc : function (nim){
-            console.log(nim);
+            confirmQuest('info', 'Konfirmasi', 'Proses hapus data mahasiswa ...?', function (x) {hapusProses(nim)});
         }
     }
 });
+
+function hapusProses(nim)
+{
+    let r = server + "app/core/mahasiswa/delete";
+    let dr = {'nim':nim}
+    axios.post(r, dr).then(function (res){
+        if(res.data.status === true){
+            setTimeout(function(){
+                pesanUmumApp('success', 'Sukses', 'Data mahasiswa berhasil dihapus ..');
+                renderPage('app/core/mahasiswa');
+            }, 300);
+        }else{
+            pesanUmumApp('warning', res.data.code, res.data.msg);
+        }
+    });
+}
 
 function setImg(){
     var citraInput = document.querySelector('#txtFoto');
