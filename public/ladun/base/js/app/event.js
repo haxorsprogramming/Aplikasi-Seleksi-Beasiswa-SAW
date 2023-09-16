@@ -1,8 +1,8 @@
 // vue object
 var appProduk = new Vue({
-    el : '#divDataEvent',
+    el : "#divDataEvent",
     data : {
-        kdEventEdit : ''
+        kdEventEdit : ""
     },
     methods : {
         tambahEventAtc : function()
@@ -14,14 +14,14 @@ var appProduk = new Vue({
         },
         startEventAtc : function (kdEvent)
         {
-            confirmQuest('info', 'Konfirmasi', 'Proses start event ...?', function (x) {startEventProses(kdEvent)});
+            confirmQuest("info", "Konfirmasi", "Proses start event ...?", function (x) {startEventProses(kdEvent)});
         },
         editEventAtc : function (kdEvent)
         {
             appProduk.kdProdukEdit = kdEvent;
             let r = server + "app/core/event/api/detail";
-            let dr = {'kdEvent':kdEvent}
-            axios.post(r, dr).then(function (res){
+            let ds = {'kdEvent':kdEvent}
+            axios.post(r, ds).then(function (res){
                if(res.data.status === true){
                    document.querySelector("#txtNamaEventEdit").value = res.data.data.nama_event;
                    document.querySelector("#txtKeteranganEdit").value = res.data.data.keterangan;
@@ -34,13 +34,13 @@ var appProduk = new Vue({
                    }, 500);
 
                }else{
-                   pesanUmumApp('warning', 'Failed', res.data.error);
+                   pesanUmumApp("warning", "Failed", res.data.error);
                }
             });
         },
         deleteEventAtc : function (kdEvent)
         {
-            confirmQuest('info', 'Konfirmasi', 'Proses hapus event ...?', function (x) {hapusProses(kdEvent)});
+            confirmQuest("info", "Konfirmasi", "Proses hapus event ...?", function (x) {hapusProses(kdEvent)});
         }
     }
 });
@@ -57,7 +57,7 @@ function prosesTambahEvent()
     let sValidasi = validasiProses(namaEvent, kuota, tglMulai, tglSelesai);
 
     if(sValidasi === false){
-        pesanUmumApp('warning', 'Validasi form !!!', 'Harap isi semua field !!!');
+        pesanUmumApp("warning", "Validasi form !!!", "Harap isi semua field !!!");
     }else{
 
         let dr = {
@@ -67,7 +67,7 @@ function prosesTambahEvent()
             'tglMulai': tglMulai,
             'tglSelesai':tglSelesai
         }
-        confirmQuest('info', 'Konfirmasi', 'Proses tambah event ...?', function (x) {tambahProses(dr)});
+        confirmQuest("info", "Konfirmasi", "Proses tambah event ...?", function (x) {tambahProses(dr)});
     }
 }
 
@@ -79,7 +79,7 @@ function startEventProses(kdEvent)
         $("#modalEditEvent").modal("hide");
         setTimeout(function(){
             pesanUmumApp(res.data.status === true ? 'success' : 'warning', res.data.code, res.data.msg);
-            renderPage('app/core/event');
+            renderPage("app/core/event");
         }, 300);
     });
 }

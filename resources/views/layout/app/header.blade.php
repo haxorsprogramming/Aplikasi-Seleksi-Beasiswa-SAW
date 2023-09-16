@@ -127,7 +127,7 @@
                             <div class="dropdown-menu" aria-labelledby="topnav-layout">
                                 <a href="javascript:void(0)" onclick="renderPage('app/core/event', 'Event Seleksi')" class="dropdown-item">Event</a>
                                 <a href="javascript:void(0)" onclick="renderPage('app/core/mahasiswa', 'Data Mahasiswa')" class="dropdown-item">Mahasiswa</a>
-                                <a href="javascript:void(0)" onclick="renderPage('app/core/kategori', 'Kategori')" class="dropdown-item">Kategori</a>
+                                <a href="javascript:void(0)" onclick="renderPage('app/core/kategori', 'Kategori')" class="dropdown-item">Kategori Seleksi</a>
                             </div>
                         </li>
                         <li class="nav-item">

@@ -66,7 +66,7 @@ class EventController extends Controller
         $this->baseResponse['status'] = true;
         $this->baseResponse['code'] = 200;
         $this->baseResponse['data'] = $dEvent;
-        $this->baseResponse['msg'] = "Success delete event ...";
+        $this->baseResponse['msg'] = "Success load data event ...";
         return \Response::json($this->baseResponse);
     }
 
@@ -100,7 +100,7 @@ class EventController extends Controller
     function checkNamaEvent(string $namaEvent):bool
     {
         $statusCek = true;
-        $qCekEvent = EventModel::where('nama_event', $namaEvent)->count();
+        $qCekEvent = EventModel::where('nama_event', $namaEvent)->where('active', '1')->count();
         if($qCekEvent > 0){
             $statusCek = false;
         }

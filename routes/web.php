@@ -37,6 +37,9 @@ Route::group(['prefix'=>'app'], function (){
             Route::get('/', [MahasiswaController::class, 'mahasiswaPage']);
             Route::post('/add', [MahasiswaController::class, 'addProcess']);
             Route::post('/delete', [MahasiswaController::class, 'deleteProcess']);
+            Route::group(['prefix'=>'api'], function (){
+                Route::post('/detail', [MahasiswaController::class, 'apiDetail']);
+            });
         });
     });
 });

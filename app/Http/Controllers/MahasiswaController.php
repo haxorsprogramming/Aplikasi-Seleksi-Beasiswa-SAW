@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -20,7 +19,7 @@ class MahasiswaController extends Controller
     function mahasiswaPage()
     {
         $dataJurusan = Config::get("helper.jurusan");
-        $dataMahasiswa = DataMahasiswaModel::all();
+        $dataMahasiswa = DataMahasiswaModel::where('active', '1')->get();
         $dr = [
             "dataJurusan" => $dataJurusan,
             "dataMahasiswa" => $dataMahasiswa
@@ -72,13 +71,23 @@ class MahasiswaController extends Controller
         try {
             unlink("file_upload/foto_mahasiswa/".$namaPic);
         } finally {
-            DataMahasiswaModel::where('nim', $request->nim)->delete();
+            DataMahasiswaModel::where('nim', $request->nim)->update(['active' => '0']);
         }
-
 
         $this->baseResponse['status'] = true;
         $this->baseResponse['code'] = 200;
         $this->baseResponse['msg'] = "Sukses menghapus data mahasiswa ...";
+        return \Response::json($this->baseResponse);
+    }
+
+    public function apiDetail(Request $request)
+    {
+        $nim = $request->nim;
+        $dMahasiswa = DataMahasiswaModel::where('nim', $nim)->first();
+        $this->baseResponse['status'] = true;
+        $this->baseResponse['code'] = 200;
+        $this->baseResponse['data'] = $dMahasiswa;
+        $this->baseResponse['msg'] = "Success load data mahasiswa ...";
         return \Response::json($this->baseResponse);
     }
 
