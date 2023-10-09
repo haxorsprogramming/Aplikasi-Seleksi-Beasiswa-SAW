@@ -31,6 +31,7 @@ Route::group(['prefix'=>'app'], function (){
                Route::post('/detail', [EventController::class, 'apiDetail']);
             });
             Route::post('/start', [EventController::class, 'startEvent']);
+            Route::get('/assign-peserta', [EventController::class, 'assignPeserta']);
         });
         // mahasiswa
         Route::group(['prefix'=>'mahasiswa'], function (){
