@@ -97,10 +97,7 @@ class EventController extends Controller
         return \Response::json($this->baseResponse);
     }
 
-    public function assignPeserta()
-    {
-        
-    }
+
 
     function checkNamaEvent(string $namaEvent):bool
     {

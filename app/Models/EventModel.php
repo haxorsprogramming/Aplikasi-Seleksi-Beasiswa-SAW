@@ -11,6 +11,7 @@ class EventModel extends Model
     public $timestamps = false;
     protected $fillable = [
         'kd_event',
+        'nama_event',
         'keterangan',
         'kuota',
         'tanggal_mulai',

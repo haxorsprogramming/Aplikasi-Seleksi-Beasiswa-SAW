@@ -131,7 +131,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="javascript:void(0)" onclick="renderPage('app/core/event/assign-peserta', 'Assign Peserta Seleksi')">
+                            <a class="nav-link" href="javascript:void(0)" onclick="renderPage('app/core/assign', 'Assign Peserta Seleksi')">
                                 <i class="mdi mdi-equalizer-outline mr-2"></i>Assign Peserta
                             </a>
                         </li>

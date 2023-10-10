@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\AssignController;
 
 Route::get('/', [HomeController::class, 'homePage']);
 
@@ -41,6 +42,10 @@ Route::group(['prefix'=>'app'], function (){
             Route::group(['prefix'=>'api'], function (){
                 Route::post('/detail', [MahasiswaController::class, 'apiDetail']);
             });
+        });
+        // assign peserta ke event
+        Route::group(['prefix'=>'assign'], function (){
+            Route::get('/', [AssignController::class, 'assignPeserta']);
         });
     });
 });
