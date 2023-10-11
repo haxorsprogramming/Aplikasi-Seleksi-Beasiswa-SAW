@@ -8,3 +8,8 @@
 <li>Assign peserta ke event beasiswa</li>
 <li>Proses seleksi peserta</li>
 <li>Laporan penerimaan beasiswa</li>
+
+<h5>Helper Icon</h5>
+<li>Delete icon <code>$icDelete</code></li>
+<li>StartEvent icon <code>$icDelete</code></li>
+

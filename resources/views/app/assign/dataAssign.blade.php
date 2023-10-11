@@ -31,7 +31,11 @@
                             <td>{{ $event->status_event }}</td>
                             <td>{{ $event->kuota }}</td>
                             <td></td>
-                            <td></td>
+                            <td>
+                                <a class="btn btn-success btn-sm waves-effect waves-light" href="javascript:void(0)">
+                                    <i class="{{ $iconInfo }}"></i> Detail
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
