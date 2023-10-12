@@ -32,7 +32,7 @@
                             <td>{{ $event->kuota }}</td>
                             <td></td>
                             <td>
-                                <a class="btn btn-success btn-sm waves-effect waves-light" href="javascript:void(0)">
+                                <a class="btn btn-success btn-sm waves-effect waves-light" href="javascript:void(0)" onclick="renderPage('app/core/assign/{{$event->kd_event}}', 'Event Seleksi')">
                                     <i class="{{ $iconInfo }}"></i> Detail
                                 </a>
                             </td>

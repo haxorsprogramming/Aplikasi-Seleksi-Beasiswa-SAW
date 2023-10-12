@@ -41,11 +41,13 @@ Route::group(['prefix'=>'app'], function (){
             Route::post('/delete', [MahasiswaController::class, 'deleteProcess']);
             Route::group(['prefix'=>'api'], function (){
                 Route::post('/detail', [MahasiswaController::class, 'apiDetail']);
+
             });
         });
         // assign peserta ke event
         Route::group(['prefix'=>'assign'], function (){
             Route::get('/', [AssignController::class, 'assignPeserta']);
+            Route::get('/{id}', [AssignController::class, 'detailAssign']);
         });
     });
 });

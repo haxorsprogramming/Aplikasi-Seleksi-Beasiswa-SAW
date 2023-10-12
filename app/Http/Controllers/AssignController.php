@@ -18,4 +18,10 @@ class AssignController extends Controller
         $dr = ['dataEvent' => $dataEvent];
         return view('app.assign.assign', $dr);
     }
+
+    public function detailAssign(Request $request, $id)
+    {
+        echo $id;
+    }
+
 }
